@@ -1,0 +1,21 @@
+name: Publish to Snap Store
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Snapcraft Environment
+      run: |
+        sudo snap install snapcraft --classic
+        
+    - name: Build Snap Package
+      run: |
+        echo "Building your space escape runner game..."
+        # Windows/Web base packaging shortcut
