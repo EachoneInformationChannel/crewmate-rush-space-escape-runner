@@ -1,36 +1,17 @@
-name: crewmate-rush-space-escape-runner
-base: core22
-version: '1.0'
-summary: Crewmate Rush Space Escape Runner Game
-description: |
-  An action-packed 3-lane space escape runner featuring crewmate tasks.
+name: Publish to Snap Store
 
-grade: stable
-confinement: strict
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
-apps:
-  crewmate-rush-space-escape-runner:
-    command: bin/desktop-launch $SNAP/usr/bin/http-server $SNAP/dist -p 8080
-    extensions: [gnome]
-    plugs:
-      - x11
-      - opengl
-      - network
-      - audio-playback
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
 
-parts:
-  my-game:
-    plugin: npm
-    source: .
-    npm-node-version: 18.16.0
-    build-packages:
-      - libxss1
-      - libgconf-2-4
-      - libnss3
-    stage-packages:
-      - nodejs
-    override-build: |
-      npm install -g http-server
-      npm install
-      npm run build
-      snapcraftctl build
+    - name: Web Build and Direct Snap Release
+      uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
