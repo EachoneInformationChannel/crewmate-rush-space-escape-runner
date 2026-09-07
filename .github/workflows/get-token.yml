@@ -1,11 +1,30 @@
 name: Get Snapcraft Token
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      email:
+        description: 'Ubuntu/Snapcraft Email'
+        required: true
+      password:
+        description: 'Ubuntu/Snapcraft Password'
+        required: true
+
 jobs:
   token:
     runs-on: ubuntu-latest
     steps:
-    - name: Export Token
+    - name: Install and Export
       run: |
-        echo "Apne browser me naya tab kholein aur is link par jayein:"
-        echo "https://ubuntu.com"
-        echo "Wahan login karne ke baad, aapko token mil jayega."
+        sudo apt-get update && sudo apt-get install -y expect
+        
+        expect -c "
+        spawn npx snapcraft export-login --snaps=crewmate-rush-space-escape-runner --out=token.txt
+        expect \"Email:\"
+        send \"${{ github.event.inputs.email }}\r\"
+        expect \"Password:\"
+        send \"${{ github.event.inputs.password }}\r\"
+        expect eof
+        "
+        echo "=== COPY THE TEXT BELOW THIS LINE ==="
+        cat token.txt
+        echo "=== COPY THE TEXT ABOVE THIS LINE ==="
