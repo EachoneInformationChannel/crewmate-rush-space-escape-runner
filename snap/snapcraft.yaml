@@ -1,0 +1,29 @@
+name: crewmate-rush-space-escape-runner
+base: core22
+version: '1.0'
+summary: Crewmate Rush Space Escape Runner Game
+description: |
+  An action-packed 3-lane space escape runner featuring crewmate tasks.
+
+grade: stable
+confinement: strict
+
+apps:
+  crewmate-rush-space-escape-runner:
+    command: bin/electron-app
+    extensions: [gnome]
+    plugs:
+      - x11
+      - opengl
+      - network
+      - audio-playback
+
+parts:
+  my-game:
+    plugin: npm
+    source: .
+    npm-node-version: 18.16.0
+    build-packages:
+      - libxss1
+      - libgconf-2-4
+      - libnss3
