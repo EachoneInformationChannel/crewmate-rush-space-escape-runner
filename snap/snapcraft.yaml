@@ -10,7 +10,7 @@ confinement: strict
 
 apps:
   crewmate-rush-space-escape-runner:
-    command: bin/electron-app
+    command: bin/desktop-launch node $SNAP/dist/server.cjs
     extensions: [gnome]
     plugs:
       - x11
@@ -22,8 +22,14 @@ parts:
   my-game:
     plugin: npm
     source: .
-    npm-node-version: 18.16.0
+    npm-node-version: 20.11.0
     build-packages:
       - libxss1
       - libgconf-2-4
       - libnss3
+    stage-packages:
+      - nodejs
+    override-build: |
+      npm install
+      npm run build
+      snapcraftctl build
