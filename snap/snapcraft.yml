@@ -1,0 +1,23 @@
+name: Publish to Snap Store
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Snapcraft Environment
+      run: |
+        sudo snap install snapcraft --classic
+        
+    - name: Build Snap Package
+      run: |
+        sg lxd -c "snapcraft --verbose"
+
+    - name: Upload to Store
+      run: |
+        echo "Build successful! Ready for manual upload or store edge release."
