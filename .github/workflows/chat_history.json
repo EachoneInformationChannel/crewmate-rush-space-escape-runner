@@ -1,0 +1,60 @@
+[
+  {
+    "id": "sys-init",
+    "username": "System Broadcast",
+    "color": "#06b6d4",
+    "text": "🚀 Welcome to Crewmate Rush Public Space Comms Chat! Connect with players worldwide.",
+    "timestamp": 1788439312158,
+    "isSystem": true
+  },
+  {
+    "id": "dev-welcome",
+    "username": "Eachone Information Channel (Dev)",
+    "color": "#f59e0b",
+    "text": "Welcome Crewmates! 🌟 Share your highscores, custom GIFs, stickers, and suggestions here! SafeChat filter active 🛡️",
+    "timestamp": 1788439432158,
+    "isDeveloper": true
+  },
+  {
+    "id": "msg-1",
+    "username": "Red_Leader",
+    "color": "#ef4444",
+    "text": "Just scored 125,000m on Nightmare Mode! Who can beat that? 🔥",
+    "timestamp": 1788439492158,
+    "isAiCrew": true
+  },
+  {
+    "id": "msg-2",
+    "username": "Cyan_Cadet",
+    "color": "#06b6d4",
+    "text": "The Void Hunter almost caught me near Reactor Bay! 😱",
+    "timestamp": 1788439552158,
+    "isAiCrew": true
+  },
+  {
+    "id": "sticker-1",
+    "username": "Pink_Ninja",
+    "color": "#ec4899",
+    "text": "Check this out!",
+    "mediaType": "sticker",
+    "stickerName": "🚀 SPACE ESCAPE",
+    "timestamp": 1788439612158,
+    "isAiCrew": true
+  },
+  {
+    "id": "sec-alert-1788439686089-q69hq",
+    "username": "🛡️ SECURITY CONTROL CENTER",
+    "color": "#ef4444",
+    "text": "🚨 INTRUSION ALERT: Dev Lock unlock attempt by IP [127.0.***] / Device [DEV-MAC-UN...]. Password rejected (Attempt #1) ",
+    "timestamp": 1788439686089,
+    "isSystem": true
+  },
+  {
+    "id": "sec-alert-1788440190074-81myi",
+    "username": "🛡️ SECURITY CONTROL CENTER",
+    "color": "#ef4444",
+    "text": "🚨 INTRUSION ALERT: Dev Lock unlock attempt by IP [127.0.***] / Device [DEV-MAC-UN...]. Password rejected (Attempt #1) ",
+    "timestamp": 1788440190074,
+    "isSystem": true
+  }
+]

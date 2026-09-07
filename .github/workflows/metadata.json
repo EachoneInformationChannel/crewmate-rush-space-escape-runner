@@ -1,0 +1,6 @@
+{
+  "name": "Crewmate Rush Space Escape Runner",
+  "description": "An action-packed 3-lane space escape runner featuring crewmate tasks, imposter escapes, multiplayer room support, powerups, and custom skins.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

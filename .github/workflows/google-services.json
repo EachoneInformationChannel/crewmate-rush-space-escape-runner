@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953861411559",
+    "project_id": "crewmate-rush-space-escape-run",
+    "storage_bucket": "crewmate-rush-space-escape-run.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953861411559:android:bc86f6a8f195e0b7e40842",
+        "android_client_info": {
+          "package_name": "com.eachoneinformationchannel.crewmaterushspaceescaperunner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvsTSpnKlQ5Ak9dy8NMJB6ykPopt3f81E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
