@@ -3,7 +3,7 @@ name: Publish to Snap Store
 on:
   push:
     branches: [ main ]
-  workflow_dispatch: # <--- Yeh line add karni hai taake manual run button aa jaye
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -11,14 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Snapcraft Environment
-      run: |
-        sudo snap install snapcraft --classic
-        
-    - name: Build Snap Package
-      run: |
-        sg lxd -c "snapcraft --verbose"
-
-    - name: Upload to Store
-      run: |
-        echo "Build successful! Ready for store release."
+    - name: Build and Publish Snap
+      uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
