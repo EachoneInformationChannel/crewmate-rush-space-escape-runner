@@ -1,0 +1,11 @@
+name: Get Snapcraft Token
+on: workflow_dispatch
+jobs:
+  token:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Export Token
+      run: |
+        echo "Apne browser me naya tab kholein aur is link par jayein:"
+        echo "https://ubuntu.com"
+        echo "Wahan login karne ke baad, aapko token mil jayega."
