@@ -1,9 +1,12 @@
 name: Generate Snap Token
 on: workflow_dispatch
 jobs:
-  token-setup:
+  token:
     runs-on: ubuntu-latest
     steps:
-    - name: Complete System Setup
+    - name: Get Login Link
       run: |
-        echo "Token verification channel is active."
+        echo "=========================================================="
+        echo "Niche diye gaye official link par click karke login karein:"
+        echo "https://ubuntu.com"
+        echo "=========================================================="
