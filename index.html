@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Crewmate Rush Space Escape Runner</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PDVDHCZDYW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PDVDHCZDYW');
+    </script>
+
+    <!-- PWA & PWABuilder Meta Tags -->
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#0b0f19" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Crewmate Rush Space Escape Runner" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="./icon-512.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./icon-32.png" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+
+    <!-- Microsoft Store & Windows On-Device Tile Meta Tags (Policy 10.1.1.11 Compliant) -->
+    <meta name="application-name" content="Crewmate Rush Space Escape Runner" />
+    <meta name="msapplication-TileColor" content="#0284c7" />
+    <meta name="msapplication-TileImage" content="./assets/Square150x150Logo.png" />
+    <meta name="msapplication-square70x70logo" content="./assets/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="./assets/Square150x150Logo.png" />
+    <meta name="msapplication-wide310x150logo" content="./assets/Wide310x150Logo.png" />
+    <meta name="msapplication-square310x310logo" content="./assets/Square310x310Logo.png" />
+    <meta name="msapplication-config" content="./browserconfig.xml" />
+
+    <!-- Kongregate Official HTML5 API Bridge (Enables official client-side stats/leaderboards) -->
+    <script src="https://cdn1.kongregate.com/javascripts/kongregate_api.js"></script>
+
+    <script>
+      // Safe Service Worker Lifecycle: Bypass in development/container/WebViews to prevent caching stale modules
+      var isDevOrWebView = window.location.hostname.includes('ais-dev-') || 
+                           window.location.hostname.includes('ais-pre-') || 
+                           window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1' ||
+                           window.location.protocol === 'file:' ||
+                           window.location.protocol.startsWith('app') ||
+                           window.location.hostname.includes('androidplatform.net') ||
+                           window.location.hostname.includes('webintoapp') ||
+                           !window.location.hostname;
+      if (isDevOrWebView) {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for (var i = 0; i < registrations.length; i++) {
+              registrations[i].unregister();
+            }
+          }).catch(function() {});
+        }
+        if ('caches' in window) {
+          caches.keys().then(function(names) {
+            for (var i = 0; i < names.length; i++) {
+              caches.delete(names[i]);
+            }
+          }).catch(function() {});
+        }
+      } else if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js', { scope: '/' })
+            .then(function(reg) {
+              // Immediately check for SW updates
+              reg.update().catch(function() {});
+              
+              if (reg.waiting) {
+                reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+              }
+
+              // Check for updates periodically
+              reg.onupdatefound = function() {
+                var installingWorker = reg.installing;
+                if (installingWorker) {
+                  installingWorker.onstatechange = function() {
+                    if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      installingWorker.postMessage({ type: 'SKIP_WAITING' });
+                    }
+                  };
+                }
+              };
+            })
+            .catch(function(err) {
+              console.log('[SW] Registration skipped or failed:', err);
+            });
+
+          // Controller changed silently without interrupting active player session
+          navigator.serviceWorker.addEventListener('controllerchange', function() {
+            console.log('[SW] Controller updated cleanly in background.');
+          });
+        });
+      }
+    </script>
+    
+    <!-- Comprehensive Polyfills for Old & New Android WebViews (Android 6 to 15+, Chrome 50-120+, Realme C3, Android 19/20) -->
+    <script>
+      (function() {
+        // 0. Offline.js polyfill for third-party ad scripts (default 'up' to prevent false offline in WebViews)
+        if (typeof window.Offline === 'undefined') {
+          var _offlineListeners = {};
+          window.Offline = {
+            state: 'up',
+            check: function() {
+              return window.Offline.state;
+            },
+            on: function(event, fn) {
+              if (typeof fn !== 'function') return;
+              if (!_offlineListeners[event]) _offlineListeners[event] = [];
+              _offlineListeners[event].push(fn);
+            },
+            off: function(event, fn) {
+              if (_offlineListeners[event]) {
+                _offlineListeners[event] = _offlineListeners[event].filter(function(cb) { return cb !== fn; });
+              }
+            },
+            trigger: function(event) {
+              if (_offlineListeners[event]) {
+                _offlineListeners[event].forEach(function(fn) { try { fn(); } catch(e){} });
+              }
+            },
+            options: { game: true }
+          };
+          if (typeof window.addEventListener === 'function') {
+            window.addEventListener('online', function() {
+              window.Offline.state = 'up';
+              window.Offline.trigger('up');
+              window.Offline.trigger('confirmed-up');
+            });
+            window.addEventListener('offline', function() {
+              // Only flag down if confirmed by network failure
+              window.Offline.state = 'down';
+              window.Offline.trigger('down');
+              window.Offline.trigger('confirmed-down');
+            });
+          }
+        }
+
+        // 1. globalThis polyfill
+        if (typeof globalThis === 'undefined') {
+          window.globalThis = window;
+        }
+
+        // 2. AudioContext vendor prefix
+        window.AudioContext = window.AudioContext || window.webkitAudioContext || null;
+
+        // 3. requestAnimationFrame vendor prefix
+        window.requestAnimationFrame = window.requestAnimationFrame || 
+          window.webkitRequestAnimationFrame || 
+          window.mozRequestAnimationFrame || 
+          function(callback) { return window.setTimeout(function() { callback(Date.now()); }, 1000 / 60); };
+        
+        window.cancelAnimationFrame = window.cancelAnimationFrame || 
+          window.webkitCancelAnimationFrame || 
+          window.mozCancelAnimationFrame || 
+          function(id) { window.clearTimeout(id); };
+
+        // 4. Promise.prototype.finally polyfill
+        if (!Promise.prototype.finally) {
+          Promise.prototype.finally = function(callback) {
+            var P = this.constructor;
+            return this.then(
+              function(value) { return P.resolve(callback()).then(function() { return value; }); },
+              function(reason) { return P.resolve(callback()).then(function() { throw reason; }); }
+            );
+          };
+        }
+
+        // 5. Promise.allSettled polyfill
+        if (!Promise.allSettled) {
+          Promise.allSettled = function(promises) {
+            return Promise.all(promises.map(function(p) {
+              return Promise.resolve(p).then(
+                function(value) { return { status: 'fulfilled', value: value }; },
+                function(reason) { return { status: 'rejected', reason: reason }; }
+              );
+            }));
+          };
+        }
+
+        // 6. Array.prototype.flat polyfill
+        if (!Array.prototype.flat) {
+          Array.prototype.flat = function(depth) {
+            var flattener = function(arr, d) {
+              return d > 0 ? arr.reduce(function(acc, val) {
+                return acc.concat(Array.isArray(val) ? flattener(val, d - 1) : val);
+              }, []) : arr.slice();
+            };
+            return flattener(this, depth === undefined ? 1 : depth);
+          };
+        }
+
+        // 7. Object.fromEntries polyfill
+        if (!Object.fromEntries) {
+          Object.fromEntries = function(entries) {
+            if (!entries || !entries[Symbol.iterator]) {
+              return {};
+            }
+            var obj = {};
+            for (var entry of entries) {
+              if (Object(entry) !== entry) continue;
+              obj[entry[0]] = entry[1];
+            }
+            return obj;
+          };
+        }
+
+        // 8. String.prototype.replaceAll polyfill
+        if (!String.prototype.replaceAll) {
+          String.prototype.replaceAll = function(str, newStr) {
+            if (Object.prototype.toString.call(str).toLowerCase() === '[object regexp]') {
+              return this.replace(str, newStr);
+            }
+            return this.replace(new RegExp(str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), newStr);
+          };
+        }
+
+        // 9. ResizeObserver fallback shim for older WebViews
+        if (typeof window.ResizeObserver === 'undefined') {
+          window.ResizeObserver = function(callback) {
+            return {
+              observe: function(target) {
+                if (target) {
+                  target._ro_interval = setInterval(function() {
+                    if (callback) callback([{ target: target }]);
+                  }, 500);
+                }
+              },
+              unobserve: function(target) {
+                if (target && target._ro_interval) {
+                  clearInterval(target._ro_interval);
+                }
+              },
+              disconnect: function() {}
+            };
+          };
+        }
+
+        // 10. Prevent uncaught errors from crashing Android WebView & silence third-party ad network timeouts
+        window.onerror = function(msg, url, line, col, error) {
+          var msgStr = String(msg || "").toLowerCase();
+          var urlStr = String(url || "").toLowerCase();
+          if (
+            msgStr.indexOf("adex") !== -1 ||
+            msgStr.indexOf("n6wxm") !== -1 ||
+            msgStr.indexOf("nap5k") !== -1 ||
+            msgStr.indexOf("alwingulla") !== -1 ||
+            msgStr.indexOf("dd133") !== -1 ||
+            msgStr.indexOf("tag.min.js") !== -1 ||
+            urlStr.indexOf("n6wxm") !== -1 ||
+            urlStr.indexOf("nap5k") !== -1 ||
+            urlStr.indexOf("alwingulla") !== -1 ||
+            urlStr.indexOf("dd133") !== -1
+          ) {
+            return true; // Completely silence third-party ad network noise
+          }
+          console.warn("[Safe WebView Error Handled]:", msg, "at", url, ":", line);
+          return true; // Prevents error modal/crashes
+        };
+
+        window.addEventListener("unhandledrejection", function(event) {
+          try {
+            var reason = event ? event.reason : null;
+            var str = (reason ? (reason.message || String(reason)) : "") + " " + (reason && reason.stack ? String(reason.stack) : "");
+            var strLower = str.toLowerCase();
+            if (
+              strLower.indexOf("adex") !== -1 ||
+              strLower.indexOf("tag.min.js") !== -1 ||
+              strLower.indexOf("n6wxm") !== -1 ||
+              strLower.indexOf("nap5k") !== -1 ||
+              strLower.indexOf("alwingulla") !== -1 ||
+              strLower.indexOf("dd133") !== -1 ||
+              strLower.indexOf("monetag") !== -1
+            ) {
+              if (event.preventDefault) event.preventDefault();
+              if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+              return;
+            }
+            if (event && event.preventDefault) event.preventDefault();
+          } catch (e) {}
+        }, true);
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-950 text-slate-100 select-none m-0 p-0 w-full h-full overflow-hidden">
+    <div id="root" class="w-full h-full overflow-hidden"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

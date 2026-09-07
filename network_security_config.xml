@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Allow cleartext/HTTP connections by default on all domains -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Specify domain config for development and cloud testing -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain> <!-- Android Emulator localhost loopback -->
+        <domain includeSubdomains="true">run.app</domain>     <!-- Cloud Run Domains -->
+        <domain includeSubdomains="true">ai.studio</domain>   <!-- AI Studio Production Domain -->
+        <domain includeSubdomains="true">nap5k.com</domain>   <!-- Monetag tag domain -->
+        <domain includeSubdomains="true">n6wxm.com</domain>   <!-- Monetag vignette domain -->
+    </domain-config>
+</network-security-config>

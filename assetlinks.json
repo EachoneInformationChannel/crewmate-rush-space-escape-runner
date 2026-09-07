@@ -1,0 +1,41 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.eachone.spacecrewmate",
+      "sha256_cert_fingerprints": [
+        "F0:7C:1E:83:B3:7F:69:89:FA:F8:8D:18:28:C2:5E:CD:93:37:F9:5E:F0:4A:23:4E:9F:8A:2F:38:DE:7C:4F:9E",
+        "A4:21:C1:27:14:CE:EE:2F:E5:83:5A:F1:C7:E3:64:9D:69:AA:6C:54:F1:4D:99:99:99:AA:AA:BB:CC:DD:EE:FF"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.eachone.crewmate_rush",
+      "sha256_cert_fingerprints": [
+        "F0:7C:1E:83:B3:7F:69:89:FA:F8:8D:18:28:C2:5E:CD:93:37:F9:5E:F0:4A:23:4E:9F:8A:2F:38:DE:7C:4F:9E",
+        "A4:21:C1:27:14:CE:EE:2F:E5:83:5A:F1:C7:E3:64:9D:69:AA:6C:54:F1:4D:99:99:99:AA:AA:BB:CC:DD:EE:FF"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.eachone.crewmaterush",
+      "sha256_cert_fingerprints": [
+        "F0:7C:1E:83:B3:7F:69:89:FA:F8:8D:18:28:C2:5E:CD:93:37:F9:5E:F0:4A:23:4E:9F:8A:2F:38:DE:7C:4F:9E",
+        "A4:21:C1:27:14:CE:EE:2F:E5:83:5A:F1:C7:E3:64:9D:69:AA:6C:54:F1:4D:99:99:99:AA:AA:BB:CC:DD:EE:FF"
+      ]
+    }
+  }
+]

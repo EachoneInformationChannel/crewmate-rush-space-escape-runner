@@ -1,0 +1,100 @@
+[
+  {
+    "id": "score_1788703699805_cm23",
+    "name": "GalaxyCaptain",
+    "score": 195000,
+    "date": "2026-09-06",
+    "country": "Pakistan",
+    "state": "Punjab",
+    "timestamp": 1788703699805
+  },
+  {
+    "id": "sc_1",
+    "name": "PindiBoy_OP",
+    "score": 185000,
+    "date": "2026-08-28",
+    "country": "Pakistan",
+    "state": "Punjab"
+  },
+  {
+    "id": "sc_2",
+    "name": "VentMaster99",
+    "score": 145000,
+    "date": "2026-08-30",
+    "country": "Pakistan",
+    "state": "Sindh"
+  },
+  {
+    "id": "score_1788704140292_6am9",
+    "name": "ProRunner",
+    "score": 135000,
+    "date": "2026-09-06",
+    "country": "Pakistan",
+    "state": "Sindh",
+    "timestamp": 1788704140292
+  },
+  {
+    "id": "sc_3",
+    "name": "SlayerKPK",
+    "score": 128000,
+    "date": "2026-09-01",
+    "country": "Pakistan",
+    "state": "Khyber Pakhtunkhwa"
+  },
+  {
+    "id": "sc_4",
+    "name": "LahoriCrew",
+    "score": 112000,
+    "date": "2026-09-02",
+    "country": "Pakistan",
+    "state": "Punjab"
+  },
+  {
+    "id": "sc_5",
+    "name": "CrewChief_US",
+    "score": 98400,
+    "date": "2026-09-03",
+    "country": "United States",
+    "state": "California"
+  },
+  {
+    "id": "sc_6",
+    "name": "ApexRunner_NY",
+    "score": 91200,
+    "date": "2026-09-03",
+    "country": "United States",
+    "state": "New York"
+  },
+  {
+    "id": "sc_7",
+    "name": "CyberPilot_UK",
+    "score": 87500,
+    "date": "2026-09-04",
+    "country": "United Kingdom",
+    "state": "London"
+  },
+  {
+    "id": "sc_8",
+    "name": "GalaxyRider_CA",
+    "score": 82100,
+    "date": "2026-09-04",
+    "country": "Canada",
+    "state": "Ontario"
+  },
+  {
+    "id": "sc_9",
+    "name": "KarachiKing",
+    "score": 79500,
+    "date": "2026-09-05",
+    "country": "Pakistan",
+    "state": "Sindh"
+  },
+  {
+    "id": "sc_10",
+    "name": "IslamabadPro",
+    "score": 74200,
+    "date": "2026-09-05",
+    "country": "Pakistan",
+    "state": "Punjab"
+  }
+]
