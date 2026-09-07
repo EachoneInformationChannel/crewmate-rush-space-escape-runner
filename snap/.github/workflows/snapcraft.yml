@@ -3,6 +3,7 @@ name: Publish to Snap Store
 on:
   push:
     branches: [ main ]
+  workflow_dispatch: # <--- Yeh line add karni hai taake manual run button aa jaye
 
 jobs:
   publish:
@@ -20,4 +21,4 @@ jobs:
 
     - name: Upload to Store
       run: |
-        echo "Build successful! Ready for manual upload or store edge release."
+        echo "Build successful! Ready for store release."
