@@ -11,11 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Set up Snapcraft Environment
-      run: |
-        sudo snap install snapcraft --classic
-        
-    - name: Build Snap Package
-      run: |
-        echo "Building your space escape runner game..."
-        # Windows/Web base packaging shortcut
+    - name: Build and Publish Snap
+      uses: snapcore/action-publish@v1
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
