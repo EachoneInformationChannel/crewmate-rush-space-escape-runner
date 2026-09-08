@@ -11,18 +11,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # 1. Snapcraft tools ko run-time par install karna
+    # 1. Snapcraft tool install karna
     - name: Install Snapcraft
       run: |
         sudo snap install snapcraft --classic
-        sudo snap install lxd --classic
-        sudo lxd init --auto
 
-    # 2. Game ko direct clean container mein build karna
+    # 2. Game ko direct bina password ke build karna (Destructive Mode)
     - name: Build Snap
-      run: sg lxd -c "snapcraft"
+      run: |
+        sudo snapcraft build --destructive-mode
 
-    # 3. Direct release upload karna aapke token ke sath
+    # 3. Release upload karna aapke token ke sath
     - name: Upload to Snap Store
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
