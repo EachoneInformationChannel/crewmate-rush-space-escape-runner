@@ -23,7 +23,7 @@ parts:
     plugin: npm
     source: .
     npm-node-version: 20.11.0
-    npm-include-node: true
+    npm-include-node: 'true'
     build-packages:
       - libxss1
       - libgconf-2-4
