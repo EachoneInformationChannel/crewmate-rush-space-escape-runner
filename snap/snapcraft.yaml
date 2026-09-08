@@ -10,7 +10,7 @@ confinement: strict
 
 apps:
   crewmate-rush-space-escape-runner:
-    command: bin/desktop-launch node $SNAP/dist/server.cjs
+    command: bin/desktop-launch $SNAP/bin/node $SNAP/dist/server.cjs
     extensions: [gnome]
     plugs:
       - x11
@@ -32,4 +32,4 @@ parts:
     override-build: |
       npm install
       npm run build
-      snapcraftctl build
+      craftctl default
