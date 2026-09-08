@@ -1,34 +1,29 @@
-name: crewmate-rush-space-escape-runner
-base: core22
-version: '1.0'
-summary: Crewmate Rush Space Escape Runner Game
-description: |
-  An action-packed 3-lane space escape runner featuring crewmate tasks.
+name: Publish to Snap Store
 
-grade: stable
-confinement: strict
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
-apps:
-  crewmate-rush-space-escape-runner:
-    command: bin/desktop-launch $SNAP/bin/node $SNAP/dist/server.cjs
-    extensions: [gnome]
-    plugs:
-      - x11
-      - opengl
-      - network
-      - audio-playback
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
 
-parts:
-  my-game:
-    plugin: npm
-    source: .
-    npm-node-version: 20.11.0
-    npm-include-node: true
-    build-packages:
-      - libxss1
-      - libgconf-2-4
-      - libnss3
-    override-build: |
-      npm install
-      npm run build
-      craftctl default
+    # 1. Snapcraft tool install karna
+    - name: Install Snapcraft
+      run: |
+        sudo snap install snapcraft --classic
+
+    # 2. Game ko direct bina password ke build karna
+    - name: Build Snap
+      run: |
+        sudo snapcraft build --destructive-mode
+
+    # 3. Release upload karna aapke token ke sath
+    - name: Upload to Snap Store
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+      run: |
+        snapcraft upload --release=stable crewmate-rush-space-escape-runner_*.snap
