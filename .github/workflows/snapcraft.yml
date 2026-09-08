@@ -11,8 +11,20 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # Ubuntu ka official tool jo aapka snap unke servers par build aur publish karega
-    - name: Remote Build and Publish Snap
-      uses: didrocks/snapcraft-build-action@v1
-      with:
-        snapcraft_token: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+    # 1. Snapcraft tools ko run-time par install karna
+    - name: Install Snapcraft
+      run: |
+        sudo snap install snapcraft --classic
+        sudo snap install lxd --classic
+        sudo lxd init --auto
+
+    # 2. Game ko direct clean container mein build karna
+    - name: Build Snap
+      run: sg lxd -c "snapcraft"
+
+    # 3. Direct release upload karna aapke token ke sath
+    - name: Upload to Snap Store
+      env:
+        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+      run: |
+        snapcraft upload --release=stable crewmate-rush-space-escape-runner_*.snap
