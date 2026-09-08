@@ -11,7 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Web Build and Direct Snap Release
-      uses: snapcore/action-publish@v1
-      env:
-        SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+    # Ubuntu ka official tool jo aapka snap unke servers par build aur publish karega
+    - name: Remote Build and Publish Snap
+      uses: didrocks/snapcraft-build-action@v1
+      with:
+        snapcraft_token: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
