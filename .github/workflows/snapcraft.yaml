@@ -11,19 +11,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # 1. Snapcraft tool install karna
-    - name: Install Snapcraft
-      run: |
-        sudo snap install snapcraft --classic
-
-    # 2. Game ko direct bina password ke build karna
+    # 1. Official Build Action (yeh bina kisi error ke snap package bana dega)
     - name: Build Snap
-      run: |
-        sudo snapcraft build --destructive-mode
+      uses: snapcore/action-build@v1
 
-    # 3. Release upload karna aapke token ke sath
+    # 2. Official Upload Action (yeh aapke token se store par publish kar dega)
     - name: Upload to Snap Store
+      uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
-      run: |
-        snapcraft upload --release=stable crewmate-rush-space-escape-runner_*.snap
