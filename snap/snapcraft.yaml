@@ -10,11 +10,8 @@ confinement: strict
 
 apps:
   crewmate-rush-space-escape-runner:
-    command: bin/desktop-launch $SNAP/bin/node $SNAP/dist/server.cjs
-    extensions: [gnome]
+    command: usr/bin/node $SNAP/server.cjs
     plugs:
-      - x11
-      - opengl
       - network
       - audio-playback
 
@@ -22,6 +19,8 @@ parts:
   my-game:
     plugin: dump
     source: .
+    stage-packages:
+      - nodejs
     organize:
       dist: dist
       server.cjs: server.cjs
