@@ -22,17 +22,12 @@ parts:
   my-game:
     plugin: nil
     source: .
-    build-packages:
-      - curl
-      - git
     override-build: |
-      curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-      apt-get install -y nodejs
-      
-      cd $CRAFT_PART_BUILD
+      # Repository ke root folder mein hi build kar lo taake path ka masla na ho
       npm install
       npm run build
       
+      # Build hone ke baad files ko snap install directory mein daal do
       mkdir -p $CRAFT_PART_INSTALL/dist
       mkdir -p $CRAFT_PART_INSTALL/bin
       cp -r dist/* $CRAFT_PART_INSTALL/dist/
