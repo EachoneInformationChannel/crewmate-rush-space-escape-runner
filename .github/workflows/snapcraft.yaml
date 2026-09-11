@@ -26,16 +26,14 @@ parts:
       - curl
       - git
     override-build: |
-      # Install Node.js 20 directly in build environment
       curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
       apt-get install -y nodejs
-
+      
+      cd $CRAFT_PART_BUILD
       npm install
       npm run build
       
-      # Copy built files to snap install directory
       mkdir -p $CRAFT_PART_INSTALL/dist
       mkdir -p $CRAFT_PART_INSTALL/bin
       cp -r dist/* $CRAFT_PART_INSTALL/dist/
-      cp -r node_modules $CRAFT_PART_INSTALL/ 2>/dev/null || true
       cp server.cjs $CRAFT_PART_INSTALL/ 2>/dev/null || true
