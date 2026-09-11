@@ -1,16 +1,24 @@
-name: Build and Publish Snap
+name: Publish to Snap Store
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
 
-    - name: Build and Publish Snap
+    # 1. Official Build Action with explicit project path
+    - name: Build Snap
+      uses: snapcore/action-build@v1
+      with:
+        path: .
+
+    # 2. Official Upload Action
+    - name: Upload to Snap Store
       uses: snapcore/action-publish@v1
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
