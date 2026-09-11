@@ -22,6 +22,8 @@ parts:
   my-game:
     plugin: npm
     source: .
+    build-snaps:
+      - node/20/stable
     stage-packages:
       - nodejs
     override-build: |
