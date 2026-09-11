@@ -20,15 +20,8 @@ apps:
 
 parts:
   my-game:
-    plugin: nil
+    plugin: dump
     source: .
-    override-build: |
-      # Repository ke root folder mein hi build kar lo taake path ka masla na ho
-      npm install
-      npm run build
-      
-      # Build hone ke baad files ko snap install directory mein daal do
-      mkdir -p $CRAFT_PART_INSTALL/dist
-      mkdir -p $CRAFT_PART_INSTALL/bin
-      cp -r dist/* $CRAFT_PART_INSTALL/dist/
-      cp server.cjs $CRAFT_PART_INSTALL/ 2>/dev/null || true
+    organize:
+      dist: dist
+      server.cjs: server.cjs
