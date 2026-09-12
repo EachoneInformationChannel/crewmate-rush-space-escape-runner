@@ -11,7 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # 1. GitHub runner par Node.js setup karke game build karein
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
@@ -22,14 +21,15 @@ jobs:
         npm install
         npm run build
 
-    # 2. Official Snap Build Action (Ab yeh bani hui files ko snap bana dega)
     - name: Build Snap
       uses: snapcore/action-build@v1
       with:
         path: .
 
-    # 3. Official Upload Action
     - name: Upload to Snap Store
       uses: snapcore/action-publish@v1
+      with:
+        snap: crewmate-rush-space-escape-runner_*_amd64.snap
+        release: stable
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
