@@ -1,4 +1,4 @@
-name: Deploy to Snap Store
+name: Release to Snap Store
 
 on:
   push:
