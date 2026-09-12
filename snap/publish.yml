@@ -27,7 +27,9 @@ jobs:
         path: .
 
     - name: Upload to Snap Store
+      uses: snapcore/action-publish@v1
+      with:
+        file: crewmate-rush-space-escape-runner_1.0_amd64.snap
+        release: stable
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
-      run: |
-        snapcraft upload --release=stable crewmate-rush-space-escape-runner_*_amd64.snap
