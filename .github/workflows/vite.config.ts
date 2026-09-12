@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import obfuscator from 'rollup-plugin-javascript-obfuscator';
 
 export default defineConfig(({ command }) => {
@@ -16,8 +16,8 @@ export default defineConfig(({ command }) => {
           compact: true,
           identifierNamesGenerator: 'hexadecimal',
           selfDefending: true,
-          controlFlowFlattening: false, // Keep false for ultra-smooth 60 FPS canvas loop rendering
-          deadCodeInjection: false,     // Keep false to prevent memory overhead
+          controlFlowFlattening: false,
+          deadCodeInjection: false,
           stringArray: true,
           stringArrayEncoding: ['base64'],
           stringArrayThreshold: 0.85,
@@ -57,7 +57,7 @@ export default defineConfig(({ command }) => {
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(__dirname, './src'),
       },
     },
     build: {
@@ -67,22 +67,25 @@ export default defineConfig(({ command }) => {
       minify: 'terser' as const,
       terserOptions: {
         compress: {
-          drop_console: false, // Keep security log warnings
+          drop_console: false,
           drop_debugger: true,
           pure_funcs: ['console.debug'],
           passes: 2,
         },
         mangle: {
-          toplevel: true, // Obfuscate top-level variable and function names
+          toplevel: true,
           keep_classnames: false,
           keep_fnames: false,
         },
         format: {
-          comments: false, // Strip all comments to prevent code leaks
+          comments: false,
         },
       },
-      sourcemap: false, // Hide source maps to prevent code decompilation
+      sourcemap: false,
       rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+        },
         output: {
           entryFileNames: 'assets/[name].js',
           chunkFileNames: 'assets/[name].js',
