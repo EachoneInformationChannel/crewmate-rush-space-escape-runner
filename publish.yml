@@ -26,10 +26,12 @@ jobs:
       with:
         path: .
 
-    - name: Upload to Snap Store
-      uses: snapcore/action-publish@v1
-      with:
-        snap: crewmate-rush-space-escape-runner_*_amd64.snap
-        release: stable
+    - name: Install Snapcraft CLI
+      run: |
+        sudo snap install snapcraft --classic
+
+    - name: Upload to Snap Store via CLI
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+      run: |
+        snapcraft upload --release=stable crewmate-rush-space-escape-runner_*_amd64.snap
