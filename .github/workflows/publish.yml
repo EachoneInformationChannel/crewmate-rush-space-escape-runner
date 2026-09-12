@@ -26,11 +26,7 @@ jobs:
       with:
         path: .
 
-    - name: Install Snapcraft CLI
-      run: |
-        sudo snap install snapcraft --classic
-
-    - name: Upload to Snap Store via CLI
+    - name: Upload to Snap Store
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
       run: |
