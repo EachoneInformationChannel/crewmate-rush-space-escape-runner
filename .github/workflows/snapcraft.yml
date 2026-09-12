@@ -11,12 +11,34 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # 1. Official Build Action (yeh bina kisi error ke snap package bana dega)
-    - name: Build Snap
-      uses: snapcore/action-build@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
-    # 2. Official Upload Action (yeh aapke token se store par publish kar dega)
-    - name: Upload to Snap Store
-      uses: snapcore/action-publish@v1
+    # 1. Pehle React/Vite game ko build karein taake dist folder ban jaye
+    - name: Install dependencies and Build Web App
+      run: |
+        npm install
+        npm run build
+
+    # 2. Ek saaf folder banakar usme zaroori files aur build copy karein
+    - name: Prepare Clean Build Directory for Snap
+      run: |
+        mkdir -p snap_build
+        cp -r dist snap_build/
+        cp snapcraft.yaml snap_build/
+
+    # 3. Sirf us saaf folder par snap build chalayein
+    - name: Build Snap Package
+      uses: snapcore/action-build@v1
+      with:
+        path: snap_build
+
+    # 4. Direct CLI ke zariye sahi file ko Snap Store par upload karein
+    - name: Upload to Snap Store via CLI
       env:
         SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+      run: |
+        echo "Uploading generated snap file directly..."
+        snapcraft upload --release=stable snap_build/*.snap
